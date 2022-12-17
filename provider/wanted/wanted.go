@@ -106,7 +106,7 @@ type Links struct {
 func (j *Wanted) GetRecruitment(minCareer int, job string) []*model.Recruitment {
 	response := make([]*model.Recruitment, 0)
 	var wg sync.WaitGroup
-	wg.Add(1)
+
 	i := 0
 	chanResponseLength := make(chan int)
 
@@ -122,8 +122,6 @@ func (j *Wanted) GetRecruitment(minCareer int, job string) []*model.Recruitment 
 		length := <-chanResponseLength
 
 		if length < 30 {
-			wg.Done()
-			fmt.Println("finish1")
 			break
 		}
 	}

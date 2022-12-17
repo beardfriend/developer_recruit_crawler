@@ -1,6 +1,9 @@
 package main
 
 import (
+	"sync"
+
+	"dev_recruitment_crawler/model"
 	"dev_recruitment_crawler/provider"
 	"dev_recruitment_crawler/provider/jumpit"
 	"dev_recruitment_crawler/provider/wanted"
@@ -24,9 +27,19 @@ func main() {
 		provider: w,
 	}
 	engine.GET("/", func(ctx *gin.Context) {
-		resp := e.provider.GetRecruitment(1, "backend")
-		resp2 := e2.provider.GetRecruitment(1, "backend")
-		resp = append(resp, resp2...)
+		var wg sync.WaitGroup
+		resp := make([]*model.Recruitment, 0)
+		wg.Add(2)
+		go func() {
+			defer wg.Done()
+			resp = append(resp, e.provider.GetRecruitment(1, "backend")...)
+		}()
+
+		go func() {
+			defer wg.Done()
+			resp = append(resp, e2.provider.GetRecruitment(1, "backend")...)
+		}()
+		wg.Wait()
 
 		ctx.JSON(200, resp)
 	})
