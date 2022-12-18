@@ -1,12 +1,17 @@
 {{template "header.html"}}
 <h1 class="title">INDEX PAGE</h1>
-<div>
+<div style="display:flex;justify-content:center; flex-wrap: wrap; ">
     {{ range $recuritment := .recruitments }}
-    <p>{{.Title}}</p>
-    <p>{{.Url}}</p>
-    <p>{{.ImageUrl}}</p>
-    <p>{{.CompanyName}}</p>
-    <p>{{.Location}}</p>
+	<div style="width:20%; border:1px solid gray;">
+		<h1>{{.Title}}</h1>
+		<div style="display:flex;">
+			<h2>{{.CompanyName}}</h2>
+			<img style="width:150px;height:150px" src="{{.ImageUrl}}"/>	
+		</div>
+		<a href="{{.Url}}">링크 바로가기</a>
+		<p>{{.Location}}</p>
+	</div>
 	{{ end }}
+
 </div>
 {{template "footer.html"}}
