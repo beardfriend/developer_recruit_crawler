@@ -1,0 +1,12 @@
+{{template "header.html"}}
+<h1 class="title">INDEX PAGE</h1>
+<div>
+    {{ range $recuritment := .recruitments }}
+    <p>{{.Title}}</p>
+    <p>{{.Url}}</p>
+    <p>{{.ImageUrl}}</p>
+    <p>{{.CompanyName}}</p>
+    <p>{{.Location}}</p>
+	{{ end }}
+</div>
+{{template "footer.html"}}

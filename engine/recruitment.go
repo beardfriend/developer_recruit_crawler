@@ -1,25 +1,44 @@
 package engine
 
 import (
+	"context"
+	"fmt"
 	"sync"
 
 	"dev_recruitment_crawler/model"
 	"dev_recruitment_crawler/provider"
 	"dev_recruitment_crawler/provider/jumpit"
+	"dev_recruitment_crawler/provider/programmers"
 	"dev_recruitment_crawler/provider/wanted"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Engine struct {
 	Providers map[string]provider.Provider
+	db        *mongo.Client
 }
 
-func NewEngine() *Engine {
+func NewEngine(mongo *mongo.Client) *Engine {
 	providers := make(map[string]provider.Provider, 0)
 	providers["jumpit"] = jumpit.NewJumpit()
 	providers["wanted"] = wanted.NewWanted()
+	providers["programmers"] = programmers.NewProgrammers()
 	return &Engine{
 		Providers: providers,
+		db:        mongo,
 	}
+}
+
+func (e *Engine) CronRecruitment() {
+	coll := e.db.Database("db").Collection("recruitments")
+	m := e.GetRecruitment()
+	newRecruit := make([]interface{}, 0)
+	for _, v := range m {
+		newRecruit = append(newRecruit, v)
+	}
+	fmt.Println(len(newRecruit))
+	coll.InsertMany(context.TODO(), newRecruit)
 }
 
 func (e *Engine) GetRecruitment() []*model.Recruitment {
