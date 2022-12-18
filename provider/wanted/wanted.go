@@ -132,6 +132,13 @@ func (j *Wanted) GetRecruitment(minCareer int, job string) []*model.Recruitment 
 
 func (j *Wanted) addResponse(data []Datum, response []*model.Recruitment) []*model.Recruitment {
 	for _, v := range data {
+		if v.DueTime != nil {
+			continue
+		}
+
+		if v.Status != "active" {
+			continue
+		}
 		response = append(response, &model.Recruitment{
 			Title:       v.Position,
 			Url:         fmt.Sprintf("https://www.wanted.co.kr/wd/%d", v.ID),
