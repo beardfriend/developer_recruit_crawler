@@ -1,8 +1,6 @@
 package engine
 
 import (
-	"context"
-	"fmt"
 	"sync"
 
 	"dev_recruitment_crawler/model"
@@ -11,16 +9,13 @@ import (
 	"dev_recruitment_crawler/provider/programmers"
 	"dev_recruitment_crawler/provider/saramin"
 	"dev_recruitment_crawler/provider/wanted"
-
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Engine struct {
 	Providers map[string]provider.Provider
-	db        *mongo.Client
 }
 
-func NewEngine(mongo *mongo.Client) *Engine {
+func NewEngine() *Engine {
 	providers := make(map[string]provider.Provider, 0)
 	providers["jumpit"] = jumpit.NewJumpit()
 	providers["wanted"] = wanted.NewWanted()
@@ -28,22 +23,21 @@ func NewEngine(mongo *mongo.Client) *Engine {
 	providers["saramin"] = saramin.NewSaramin()
 	return &Engine{
 		Providers: providers,
-		db:        mongo,
 	}
 }
 
-func (e *Engine) CronRecruitment() {
-	coll := e.db.Database("db").Collection("recruitments")
-	m := e.GetRecruitment()
-	newRecruit := make([]interface{}, 0)
-	for _, v := range m {
-		newRecruit = append(newRecruit, v)
-	}
-	fmt.Println(len(newRecruit))
-	coll.InsertMany(context.TODO(), newRecruit)
-}
+// func (e *Engine) CronRecruitment() {
+// 	coll := e.db.Database("db").Collection("recruitments")
+// 	m := e.GetRecruitment()
+// 	newRecruit := make([]interface{}, 0)
+// 	for _, v := range m {
+// 		newRecruit = append(newRecruit, v)
+// 	}
 
-func (e *Engine) GetRecruitment() []*model.Recruitment {
+// 	coll.InsertMany(context.TODO(), newRecruit)
+// }
+
+func (e *Engine) GetRecruitment(career int, position string) []*model.Recruitment {
 	var wg sync.WaitGroup
 	result := make([]*model.Recruitment, 0)
 	respCh := make(chan []*model.Recruitment)
@@ -51,7 +45,7 @@ func (e *Engine) GetRecruitment() []*model.Recruitment {
 		wg.Add(1)
 		go func(provider provider.Provider) {
 			defer wg.Done()
-			result := provider.GetRecruitment(1, "backend")
+			result := provider.GetRecruitment(career, position)
 			respCh <- result
 		}(v)
 	}

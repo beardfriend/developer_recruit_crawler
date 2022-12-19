@@ -7,7 +7,6 @@ import (
 	"log"
 	"math"
 	"net/http"
-	"strings"
 	"sync"
 
 	"dev_recruitment_crawler/model"
@@ -49,7 +48,7 @@ type Totalresponse struct {
 func (j *Saramin) GetRecruitment(minCareer int, job string) []*model.Recruitment {
 	total := j.total(minCareer, job)
 	page := math.Ceil(float64(total) / 50)
-	fmt.Println(total)
+
 	response := make([]*model.Recruitment, 0)
 	var wg sync.WaitGroup
 	for i := 1; i < int(page); i++ {
@@ -58,7 +57,6 @@ func (j *Saramin) GetRecruitment(minCareer int, job string) []*model.Recruitment
 			defer wg.Done()
 			resp := j.get(minCareer, job, i)
 			response = append(response, resp...)
-			fmt.Println(response)
 		}(i)
 	}
 	wg.Wait()
@@ -72,8 +70,12 @@ func (j *Saramin) total(minCareer int, job string) int64 {
 	query.Add("loc_mcd", "101000") // 서울
 	query.Add("loc_cd", "102190")  // 판교
 	query.Add("cat_kewd", getCode(job))
-	query.Add("exp_max", fmt.Sprint(minCareer)) // 경력
-	query.Add("exp_cd", fmt.Sprint(2))
+	if minCareer == 0 {
+		query.Add("exp_cd", fmt.Sprint(1))
+	} else {
+		query.Add("exp_max", fmt.Sprint(minCareer)) // 경력
+		query.Add("exp_cd", fmt.Sprint(2))
+	}
 
 	req.URL.RawQuery = query.Encode()
 
@@ -101,8 +103,14 @@ func (j *Saramin) get(minCareer int, job string, pageNo int) (result []*model.Re
 	query.Add("loc_mcd", "101000") // 서울
 	query.Add("loc_cd", "102190")  // 판교
 	query.Add("cat_kewd", getCode(job))
-	query.Add("exp_max", fmt.Sprint(minCareer)) // 경력
-	query.Add("exp_cd", "2")                    // 경력
+
+	if minCareer == 0 {
+		query.Add("exp_cd", fmt.Sprint(1))
+	} else {
+		query.Add("exp_max", fmt.Sprint(minCareer)) // 경력
+		query.Add("exp_cd", fmt.Sprint(2))
+	}
+
 	query.Add("search_optional_item", "y")
 	query.Add("search_done", "y")
 	query.Add("panel_count", "y")
@@ -129,10 +137,6 @@ func (j *Saramin) get(minCareer int, job string, pageNo int) (result []*model.Re
 	l := list.Find("div.list_body")
 	d := l.Find("div.list_item")
 	d.Each(func(i int, s *goquery.Selection) {
-		idString, _ := s.Attr("id")
-		id := strings.Split(idString, "-")[1]
-		fmt.Println(id)
-
 		recruit := s.Find("div.notification_info")
 		if len(recruit.Has("div.flag_reward_wrap").Nodes) == 0 {
 			company := s.Find("div.company_nm")

@@ -1,28 +1,17 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
 
-	"dev_recruitment_crawler/config"
 	"dev_recruitment_crawler/engine"
-	"dev_recruitment_crawler/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Load config
-	config := config.LoadConfig()
-
-	// Mongodb
-	mongo := infrastructure.NewMongodb(config.MongoUrl)
-
-	defer func() {
-		infrastructure.CloseMongodb(mongo)
-	}()
-
 	g := gin.New()
 
 	g.SetFuncMap(template.FuncMap{
@@ -30,22 +19,24 @@ func main() {
 	})
 	g.LoadHTMLGlob("templates/*.html")
 
-	e := engine.NewEngine(mongo)
+	e := engine.NewEngine()
 
 	type Request struct {
-		Position string `json:"position,omitempty" binding:"oneof=frontend,backend"`
-		Career   int    `json:"career"`
+		Position string `form:"position,default=backend" binding:"oneof=frontend backend"`
+		Career   int    `form:"career,default=1"`
 	}
 	g.GET("/", func(ctx *gin.Context) {
-		resp := e.GetRecruitment()
+		req := new(Request)
+
+		if err := ctx.ShouldBindQuery(req); err != nil {
+			ctx.HTML(http.StatusBadRequest, "400.html", nil)
+			return
+		}
+		fmt.Println(req.Career)
+		resp := e.GetRecruitment(req.Career, req.Position)
 		ctx.HTML(http.StatusOK, "index.html", gin.H{
 			"recruitments": resp,
 		})
-	})
-
-	g.GET("/cron", func(ctx *gin.Context) {
-		e.CronRecruitment()
-		ctx.JSON(200, nil)
 	})
 
 	g.Run(":3000")

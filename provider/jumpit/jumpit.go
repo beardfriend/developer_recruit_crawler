@@ -89,12 +89,17 @@ func (j *Jumpit) GetRecruitment(minCareer int, job string) []*model.Recruitment 
 
 func (j *Jumpit) addResponse(data []Position, response []*model.Recruitment) []*model.Recruitment {
 	for _, v := range data {
+		location := ""
+		if len(v.Locations) > 0 {
+			location = v.Locations[0]
+		}
+
 		response = append(response, &model.Recruitment{
 			Title:       v.Title,
 			Provider:    "jumpit",
 			Url:         fmt.Sprintf("https://www.jumpit.co.kr/position/%d", v.ID),
 			CompanyName: v.CompanyName,
-			Location:    v.Locations[0],
+			Location:    location,
 			ImageUrl:    v.Logo,
 		})
 	}
