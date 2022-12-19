@@ -90,6 +90,7 @@ func (j *Jumpit) addResponse(data []Position, response []*model.Recruitment) []*
 	for _, v := range data {
 		response = append(response, &model.Recruitment{
 			Title:       v.Title,
+			Provider:    "jumpit",
 			Url:         fmt.Sprintf("https://www.jumpit.co.kr/position/%d", v.ID),
 			CompanyName: v.CompanyName,
 			Location:    v.Locations[0],

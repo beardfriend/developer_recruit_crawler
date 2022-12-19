@@ -137,7 +137,8 @@ func (j *Programmers) addResponse(data []JobPositiontion, response []*model.Recr
 	for _, v := range data {
 		response = append(response, &model.Recruitment{
 			Title:       v.Title,
-			Url:         fmt.Sprintf("https://www.wanted.co.kr/wd/%d", v.ID),
+			Provider:    "programmers",
+			Url:         fmt.Sprintf("https://career.programmers.co.kr/job_positions/%d", v.ID),
 			CompanyName: v.Company.Name,
 			Location:    v.Company.Address,
 			ImageUrl:    v.Company.LogoURL,

@@ -1,5 +1,5 @@
 {{template "header.html"}}
-<h1 class="title">INDEX PAGE</h1>
+<h1>Recruitments</h1>
 <div style="display:flex;justify-content:center; flex-wrap: wrap; ">
     {{ range $recuritment := .recruitments }}
 	<div style="width:20%; border:1px solid gray;">
@@ -10,6 +10,7 @@
 		</div>
 		<a href="{{.Url}}">링크 바로가기</a>
 		<p>{{.Location}}</p>
+		<p>{{.Provider}}</p>
 	</div>
 	{{ end }}
 

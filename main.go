@@ -31,6 +31,11 @@ func main() {
 	g.LoadHTMLGlob("templates/*.html")
 
 	e := engine.NewEngine(mongo)
+
+	type Request struct {
+		Position string `json:"position,omitempty" binding:"oneof=frontend,backend"`
+		Career   int    `json:"career"`
+	}
 	g.GET("/", func(ctx *gin.Context) {
 		resp := e.GetRecruitment()
 		ctx.HTML(http.StatusOK, "index.html", gin.H{

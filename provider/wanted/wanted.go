@@ -141,6 +141,7 @@ func (j *Wanted) addResponse(data []Datum, response []*model.Recruitment) []*mod
 		}
 		response = append(response, &model.Recruitment{
 			Title:       v.Position,
+			Provider:    "wanted",
 			Url:         fmt.Sprintf("https://www.wanted.co.kr/wd/%d", v.ID),
 			CompanyName: v.Company.Name,
 			Location:    v.Address.Location,
