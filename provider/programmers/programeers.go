@@ -24,7 +24,7 @@ func (j *Programmers) jobCodeName(name string) int {
 	switch name {
 	case "backend":
 		return 1
-	case "front":
+	case "frontend":
 		return 4
 	default:
 		return 0
@@ -153,6 +153,7 @@ func (j *Programmers) get(minCareer int, job string, pageNo int) *response {
 	query := req.URL.Query()
 	query.Add("job_category_ids[]", fmt.Sprint(j.jobCodeName(job)))
 	query.Add("page", fmt.Sprint(pageNo))
+	query.Add("min_career", fmt.Sprint(pageNo))
 	req.URL.RawQuery = query.Encode()
 
 	c := http.Client{}

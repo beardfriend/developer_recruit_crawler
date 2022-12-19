@@ -24,7 +24,7 @@ func (j *Wanted) jobCodeName(name string) int {
 	switch name {
 	case "backend":
 		return 872
-	case "front":
+	case "frontend":
 		return 669
 	default:
 		return 518

@@ -24,7 +24,7 @@ func (j *Jumpit) jobCodeName(name string) int {
 	switch name {
 	case "backend":
 		return 1
-	case "front":
+	case "frontend":
 		return 2
 	default:
 		return 0
@@ -78,6 +78,7 @@ func (j *Jumpit) GetRecruitment(minCareer int, job string) []*model.Recruitment 
 		go func(i int) {
 			defer wg.Done()
 			resp := j.get(minCareer, job, i)
+
 			response = j.addResponse(resp.Result.Positions, response)
 		}(i)
 	}

@@ -9,6 +9,7 @@ import (
 	"dev_recruitment_crawler/provider"
 	"dev_recruitment_crawler/provider/jumpit"
 	"dev_recruitment_crawler/provider/programmers"
+	"dev_recruitment_crawler/provider/saramin"
 	"dev_recruitment_crawler/provider/wanted"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -24,6 +25,7 @@ func NewEngine(mongo *mongo.Client) *Engine {
 	providers["jumpit"] = jumpit.NewJumpit()
 	providers["wanted"] = wanted.NewWanted()
 	providers["programmers"] = programmers.NewProgrammers()
+	providers["saramin"] = saramin.NewSaramin()
 	return &Engine{
 		Providers: providers,
 		db:        mongo,
