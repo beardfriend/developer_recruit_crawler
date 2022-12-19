@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
@@ -32,12 +31,12 @@ func main() {
 			ctx.HTML(http.StatusBadRequest, "400.html", nil)
 			return
 		}
-		fmt.Println(req.Career)
+
 		resp := e.GetRecruitment(req.Career, req.Position)
 		ctx.HTML(http.StatusOK, "index.html", gin.H{
 			"recruitments": resp,
 		})
 	})
 
-	g.Run(":3000")
+	g.Run(":2000")
 }
