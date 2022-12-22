@@ -1,0 +1,59 @@
+  SYSTEMNAME: &systemName
+
+  
+  name: CI
+  on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+  jobs:
+    access:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+
+      - name: SETUP GO
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19.3
+        
+      - name: INSTALL DEPENDENCY
+        run: |
+          go mod tidy
+
+      - name: BUILD
+        run: |
+          go build ./cmd/app/main.go
+
+      - name: Test
+        run: |
+          go test ./...
+
+      - name: STOP SYSTEM
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }} 
+          script: |
+            sudo systemctl stop cralwer_job.service && rm -rf /home/ubuntu/crawler_job
+
+      - name: COPY FILE
+        uses: appleboy/scp-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          source: "./main,./templates,./env"
+          target: "crawler_job"
+  
+      - name: START SYSTEM
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }} 
+          script: |
+            sudo systemctl start cralwer_job.service
+
