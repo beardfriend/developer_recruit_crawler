@@ -1,6 +1,6 @@
 # developer_recruit_crawler
 
-URL : http://43.201.147.22:4000/?position=backend&career=1
+URL : http://13.125.114.252:4000/?position=backend&career=1
 
 position = frontend, backend
 career = 0(신입) , 1 , 2
@@ -8,15 +8,8 @@ career = 0(신입) , 1 , 2
 <img width="1659" alt="image" src="https://user-images.githubusercontent.com/97140962/208352203-fb74b4bb-d474-4989-8645-bb2e6071fc31.png">
 
 
+크롤링 1시간에 한 번씩 몽고DB에 저장
 
-
-요청 시 크롤링을 해서 데이터를 가공하기 때문에
-속도가 느리다는 단점이 있다.
-
-대안으로 캐싱을 선택했다.
-
-DB에 저장하여 불러오면 모든 유저가 동일한 속도를 낼 수 있지만,
-패스..
 
 
 ![제목 없는 다이어그램](https://user-images.githubusercontent.com/97140962/208352682-fe95d77c-0107-4941-b748-f383afe2af23.jpg)
