@@ -1,6 +1,6 @@
 # developer_recruit_crawler
 
-URL : http://43.201.147.22:4000/?position=backend&career=1
+URL : http://13.125.114.252:4000/?position=backend&career=1
 
 position = frontend, backend
 career = 0(신입) , 1 , 2
