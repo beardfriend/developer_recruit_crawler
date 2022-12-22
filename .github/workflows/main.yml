@@ -34,16 +34,18 @@
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }} 
           script: |
-            sudo systemctl stop crawler_job.service && rm -rf /home/ubuntu/crawler_job/
+            sudo systemctl stop crawler_job.service
+            rm -rf /home/ubuntu/crawler_job/
 
       - name: SET ENV
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_KEY }}
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }} 
+          username: ${{ secrets.USER }}             
           script: |
-            mkdir /home/ubuntu/crawler_job && echo ${{ secrets.ENV }} > /home/ubuntu/crawler_job/.env
+            sudo mkdir /home/ubuntu/crawler_job
+            echo ${{ secrets.ENV }} > /home/ubuntu/crawler_job/.env
 
       - name: COPY FILE
         uses: appleboy/scp-action@master
