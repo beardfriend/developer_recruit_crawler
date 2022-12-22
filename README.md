@@ -9,7 +9,7 @@ career = 0(신입) , 1 , 2
 
 
 크롤링 1시간에 한 번씩 몽고DB에 저장
-패스..
+
 
 
 ![제목 없는 다이어그램](https://user-images.githubusercontent.com/97140962/208352682-fe95d77c-0107-4941-b748-f383afe2af23.jpg)
