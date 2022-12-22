@@ -19,13 +19,13 @@
         run: |
           go mod tidy
 
-      - name: BUILD
-        run: |
-          go build ./cmd/app/main.go
-
       - name: Test
         run: |
           go test ./...
+
+      - name: BUILD
+        run: |
+          go build ./main.go
 
       - name: STOP SYSTEM
         uses: appleboy/ssh-action@master
