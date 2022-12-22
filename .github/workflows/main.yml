@@ -1,6 +1,3 @@
-  SYSTEMNAME: &systemName
-
-  
   name: CI
   on:
     push:
