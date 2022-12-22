@@ -6,6 +6,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 func NewMongodb(url string) (client *mongo.Client) {
@@ -13,7 +14,9 @@ func NewMongodb(url string) (client *mongo.Client) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	if err := client.Ping(context.Background(), readpref.Nearest()); err != nil {
+		log.Fatal(err)
+	}
 	return
 }
 
