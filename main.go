@@ -8,7 +8,6 @@ import (
 	"dev_recruitment_crawler/engine"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -18,10 +17,6 @@ func main() {
 		"upper": strings.ToUpper,
 	})
 	g.LoadHTMLGlob("templates/*.html")
-
-	if err := godotenv.Load(); err != nil {
-		panic(err)
-	}
 
 	e := engine.NewEngine(nil)
 
