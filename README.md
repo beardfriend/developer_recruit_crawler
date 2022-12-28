@@ -3,7 +3,7 @@
 URL : http://13.125.48.238:4000/?position=backend&career=1
 
 position = frontend, backend
-career = 0(신입) , 1 , 2
+career =  1 , 2 , .... 7
 
 <img width="1659" alt="image" src="https://user-images.githubusercontent.com/97140962/208352203-fb74b4bb-d474-4989-8645-bb2e6071fc31.png">
 
