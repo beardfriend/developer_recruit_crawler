@@ -25,6 +25,8 @@ func main() {
 		Career   int    `form:"career,default=1"`
 	}
 
+	g.Static("/templates", "./templates/")
+
 	g.GET("/", func(ctx *gin.Context) {
 		req := new(Request)
 
@@ -34,6 +36,7 @@ func main() {
 		}
 
 		resp := e.GetRecruitment(req.Career, req.Position)
+
 		ctx.HTML(http.StatusOK, "index.html", gin.H{
 			"recruitments": resp,
 		})
