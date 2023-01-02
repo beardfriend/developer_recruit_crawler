@@ -1,15 +1,13 @@
 # developer_recruit_crawler
 
+요청하는 즉시 크롤러가 돌기 때문에 느릴 수 있습니다.(nginx 20분 캐싱)
+
 URL : http://13.125.48.238:4000/?position=backend&career=1
 
 position = frontend, backend
 career =  1 , 2 , .... 7
 
 <img width="1659" alt="image" src="https://user-images.githubusercontent.com/97140962/208352203-fb74b4bb-d474-4989-8645-bb2e6071fc31.png">
-
-
-요청하는 즉시 크롤링
-
 
 
 ![제목 없는 다이어그램](https://user-images.githubusercontent.com/97140962/208352682-fe95d77c-0107-4941-b748-f383afe2af23.jpg)
