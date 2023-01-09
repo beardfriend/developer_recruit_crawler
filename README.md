@@ -7,6 +7,13 @@ URL : http://13.125.48.238:4000/?position=backend&career=1
 position = frontend, backend  
 career =  1 , 2 , .... 7
 
+주요 기술적 과제 
+
+- 고루틴을 이용한 비동기처리
+- 데이터 규격화 및 데이터 크롤링
+- CI / CD (github action)
+- 이해가능한 서버 아키텍처
+
 <img width="1659" alt="image" src="https://user-images.githubusercontent.com/97140962/208352203-fb74b4bb-d474-4989-8645-bb2e6071fc31.png">
 
 
