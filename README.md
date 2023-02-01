@@ -32,7 +32,7 @@
 
 ## 프로덕션
 
-주소 : http://13.125.48.238:4000/?position=backend&career=1
+주소 : http://13.125.48.238:4000?position=backend&career=1
 
 (요청 시 즉각 크롤러가 돌기에 느림)
 
