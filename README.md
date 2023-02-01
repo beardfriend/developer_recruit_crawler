@@ -1,10 +1,11 @@
 # Developer Recruitments Crawler
 
 <div style="flex">
-<img src="https://img.shields.io/badge/GO-gray?style=flat&logo=Go&logoColor=00ADD8"/>
-<img src="https://img.shields.io/badge/Gin-white?style=flat"/>
+<img src="https://img.shields.io/badge/Go-gray?style=flat&logo=Go&logoColor=00ADD8"/>
+<img src="https://img.shields.io/badge/gin-gray?style=flat"/>
 </div>
 
+<br/>
 사람인, 프로그래머스, 점핏, 원티드의 채용공고를 수집하는 크롤러
 
 
