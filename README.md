@@ -23,6 +23,7 @@
 - 채용공고 크롤러 추상화
 - CI / CD (github action)
 
+<br/>
 
 # 사용법
 
@@ -34,7 +35,6 @@
 
 (요청 시 즉각 크롤러가 돌기에 느림)
 
-<br/>
 
 ## 로컬
 
@@ -49,6 +49,8 @@ http://localhost:4000?position=backend&career=1
 position = frontend, backend  
 career= 1 ~ 7
 
+
+<br/>
 
 # 기타
 
