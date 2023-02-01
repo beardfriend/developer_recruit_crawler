@@ -46,7 +46,7 @@ http://localhost:4000?position=backend&career=1
 
 ### 파라메터
 
-position = frontend, backend
+position = frontend, backend  
 career= 1 ~ 7
 
 
