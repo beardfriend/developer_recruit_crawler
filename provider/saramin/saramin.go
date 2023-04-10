@@ -150,7 +150,7 @@ func (j *Saramin) get(minCareer int, job string, pageNo int) (result []*model.Re
 				Title:       title,
 				Provider:    "saramin",
 				Url:         fmt.Sprintf("https://www.saramin.co.kr%s", href),
-				ImageUrl:    "https://saraminhr.co.kr/resources/image/og.png",
+				ImageUrl:    "https://play-lh.googleusercontent.com/C-Rk5j68xQIgi1apCuupseecXCquaNb-VZdnBecmjYK4_LHPg-ytgk7BTSe8JHSyjoY",
 				CompanyName: cName,
 				Location:    area,
 			})
