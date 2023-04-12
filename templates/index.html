@@ -1,18 +1,31 @@
-{{template "header.html"}}
-<h1>Recruitments</h1>
-<div class="container">
-    {{ range $recuritment := .recruitments }}
-	<div style="border:1px solid gray;">
-		<h1>{{.Title}}</h1>
-		<div style="display:flex;">
-			<h2>{{.CompanyName}}</h2>
-			<img class="img" src="{{.ImageUrl}}"/>	
-		</div>
-		<a href="{{.Url}}">링크 바로가기</a>
-		<p>{{.Location}}</p>
-		<p>{{.Provider}}</p>
-	</div>
-	{{ end }}
+<!-- Create a container for the newsletter layout -->
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f8f8; font-family: Arial, sans-serif;">
+
+    <!-- Display the title for the newsletter -->
+    <h1 style="font-size: 24px; margin: 0 0 20px;">Dev Recruitments</h1>
+
+    <!-- Create a container for the recruitment items -->
+    <div style="background-color: #fff; border-radius: 5px; padding: 10px;">
+        
+        <!-- Loop through the list of recruitments and display each one -->
+        {{ range $recruitment := .recruitments }}
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <!-- Display the company logo -->
+            <img src="{{.ImageUrl}}" alt="{{.CompanyName}}" style="width: 60px; height: 60px; border-radius: 50%;">
+            <div style="flex-grow: 1;">
+                <!-- Display the title of the recruitment with a link to the recruitment URL -->
+                <h2 style="font-size: 18px; margin: 0;"><a href="{{.Url}}" style="color: #007bff; text-decoration: none;">{{.Title}}</a></h2>
+                <!-- Display the company name -->
+                <p style="font-size: 16px; margin: 0; color: #777;">{{.CompanyName}}</p>
+                <!-- Display the location and provider information for the recruitment -->
+                <p style="font-size: 14px; margin: 0; color: #777;">Location: {{.Location}} | Provider: {{.Provider}}</p>
+            </div>
+        </div>
+        {{ end }}
+
+    </div>
+
+    <!-- Display a footer with a thank you message -->
+    <p style="font-size: 14px; color: #777; margin-top: 20px;">Thank you!</p>
 
 </div>
-{{template "footer.html"}}
