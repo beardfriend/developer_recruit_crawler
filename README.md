@@ -7,6 +7,8 @@
 
 <br/>
 사람인, 프로그래머스, 점핏, 원티드의 채용공고를 수집하는 크롤러
+<br/>
+<img width="640" alt="image" src="https://github.com/beardfriend/developer_recruit_crawler/assets/97140962/08f2f62a-c0b0-429a-8b9c-a00fa72283d2">
 
 
 ## 동기
@@ -40,7 +42,7 @@ http://localhost:4000?position=backend&career=1
 
 ### 파라메터
 
-position = frontend, backend  
+position = frontend, backend, dataEngineer 
 career= 1 ~ 7
 
 
