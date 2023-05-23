@@ -26,6 +26,8 @@ func getCode(job string) string {
 		return "84"
 	case "frontend":
 		return "92"
+	case "dataEngineer":
+		return "83"
 	default:
 		return "0"
 	}

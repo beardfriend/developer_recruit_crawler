@@ -26,6 +26,8 @@ func (j *Wanted) jobCodeName(name string) int {
 		return 872
 	case "frontend":
 		return 669
+	case "dataEngineer":
+		return 655
 	default:
 		return 518
 	}

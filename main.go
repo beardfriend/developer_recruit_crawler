@@ -21,7 +21,7 @@ func main() {
 	e := engine.NewEngine(nil)
 
 	type Request struct {
-		Position string `form:"position,default=backend" binding:"oneof=frontend backend"`
+		Position string `form:"position,default=dataEngineer" binding:"oneof=frontend backend dataEngineer"`
 		Career   int    `form:"career,default=1"`
 	}
 

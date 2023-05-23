@@ -26,6 +26,8 @@ func (j *Jumpit) jobCodeName(name string) int {
 		return 1
 	case "frontend":
 		return 2
+	case "dataEngineer":
+		return 19
 	default:
 		return 0
 	}
